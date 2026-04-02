@@ -1,36 +1,54 @@
 ﻿using APICatalogo.Context;
 using APICatalogo.Models;
+using APICatalogo.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-
+using System.Diagnostics.CodeAnalysis;
+using APICatalogo.DTOs;
 
 
 namespace APICatalogo.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class ProdutosController : ControllerBase
     {
-        private readonly AppDbContext _context;
-        public ProdutosController(AppDbContext context)
-        {
-            _context = context;
-        }
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Produto>>> GetAsync()
-        {
-            var produtos = await _context.Produtos.AsNoTracking().ToListAsync(); //coleções não retornam null e sim uma coleção vazia - AsNoTracking() → informa ao EF que não precisa acompanhar mudanças        
+        private readonly IUnitOfWork _uof;
 
+        public ProdutosController(IUnitOfWork uof)
+        {
+            _uof = uof;
+        }
+
+        [HttpGet("produtos/{id}")]
+        public ActionResult<IEnumerable<ProdutoDTO>> GetProdutosPorCategoria(int id)
+        {
+            var produtos = _uof.ProdutoRepository.GetProdutosPorCategoria(id);
+            if (produtos is null)
+                return NotFound();
+
+            return Ok(produtosDto);
+        }
+
+        [HttpGet]
+
+        public ActionResult<IEnumerable<ProdutoDTO>> Get()
+        {
+            var produtos = _uof.ProdutoRepository.GetAll(); //coleções não retornam null e sim uma coleção vazia - AsNoTracking() → informa ao EF que não precisa acompanhar mudanças        
+            if (produtos is null)
+            {
+                return NotFound("Produtos não encontrados");
+            }
             return Ok(produtos);
         }
 
-        
-        [HttpGet("{id:int}")]
-        public async Task<ActionResult<Produto>> GetByIdAsync(int id)
+
+        [HttpGet("{id:int}", Name = "ObterProduto")]
+        public ActionResult<ProdutoDTO> Get(int id)
         {
-            var produto = await _context.Produtos.AsNoTracking().FirstOrDefaultAsync(p => p.ProdutoId == id);
-            if (produto == null)
+            var produto = _uof.ProdutoRepository.Get(c => c.ProdutoId == id);
+            if (produto is null)
             {
                 return NotFound("Produto não encontrado");
             }
@@ -38,44 +56,51 @@ namespace APICatalogo.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Produto>> PostAsync(Produto produto)
+        public ActionResult<ProdutoDTO> Post(ProdutoDTO produto)
         {
-            _context.Produtos.Add(produto);
-            await _context.SaveChangesAsync();           
-            return CreatedAtAction(nameof(GetByIdAsync), new { id = produto.ProdutoId }, produto);
+            if (produto is null)
+                return BadRequest("Produto é null");
+
+            var novoProduto = _uof.ProdutoRepository.Create(produto);
+            _uof.Commit();
+            return CreatedAtAction("ObterProduto", new { id = novoProduto.ProdutoId }, novoProduto);
         }
 
         [HttpPut("{id:int}")]
-        public async Task<ActionResult> PutAsync(int id, Produto produto)
+        public ActionResult Put(int id, ProdutoDTO produto)
         {
-                       if (id != produto.ProdutoId)
-            {
-                return BadRequest("Produto inválido");
-            }
-            _context.Entry(produto).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-            return Ok(produto);
+            if (id != produto.ProdutoId)
+                return BadRequest("Id do produto não confere");
+
+            var produtoAtualizado = _uof.ProdutoRepository.Update(produto);
+            _uof.Commit();
+
+            return Ok(produtoAtualizado);
 
         }
 
         [HttpDelete("{id:int}")]
-        public async Task<ActionResult<Produto>> DeleteAsync(int id)
+        public ActionResult<ProdutoDTO> Delete(int id)
         {
-            var produto = await _context.Produtos.FirstOrDefaultAsync(p => p.ProdutoId == id);
-            if (produto == null)
+            var produto = _uof.ProdutoRepository.Get(c => c.ProdutoId == id);
+
+
+            if (produto is null)
             {
                 return NotFound("Produto não encontrado");
             }
-            _context.Produtos.Remove(produto);
-            await _context.SaveChangesAsync();
-            return Ok(produto);
+            var produtoDeletado = _uof.ProdutoRepository.Delete(produto);
+            _uof.Commit();
+
+            return Ok(produtoDeletado);
         }
 
-
-
-
-
-
     }
-     
+
+
+
+
+
+
 }
+

@@ -1,9 +1,16 @@
 using APICatalogo.Context;
+using APICatalogo.Filters;
+using APICatalogo.Logging;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
+using APICatalogo.Repositories;
+using APICatalogo.Mappings;
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+
 builder.Services.AddSwaggerGen();
 
 var mySqlConnection = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -13,10 +20,26 @@ if (string.IsNullOrEmpty(mySqlConnection))
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseMySql(
-        mySqlConnection,
-        ServerVersion.AutoDetect(mySqlConnection)
-    )
-);
+    mySqlConnection,
+    new MySqlServerVersion(new Version(8, 0, 21))));
+
+builder.Services.AddScoped<ApiLoggingFilter>();
+//builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
+//builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add(typeof(ApiExceptionFilter));
+})
+    .AddJsonOptions(options => options
+    .JsonSerializerOptions
+    .ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
+builder.Logging.AddProvider(new CustomLoggerProvider(new CustomLoggerProviderConfiguration { LogLevel = LogLevel.Information }));
+
 
 var app = builder.Build();
 

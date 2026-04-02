@@ -105,4 +105,5 @@ C:\Macoratti\APICatalogo\APICatalogo\obj\Debug\net8.0\refint\APICatalogo.dll
 C:\Macoratti\APICatalogo\APICatalogo\obj\Debug\net8.0\APICatalogo.pdb
 C:\Macoratti\APICatalogo\APICatalogo\obj\Debug\net8.0\APICatalogo.genruntimeconfig.cache
 C:\Macoratti\APICatalogo\APICatalogo\obj\Debug\net8.0\ref\APICatalogo.dll
+C:\Macoratti\APICatalogo\APICatalogo\obj\Debug\net8.0\APICatalogo.sourcelink.json
 C:\Macoratti\APICatalogo\APICatalogo\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
