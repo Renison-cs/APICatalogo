@@ -8,7 +8,7 @@ namespace APICatalogo.Mappings
     {
         public static CategoriaDTO? ToCategoriaDTO(this Categoria categoria)
         {
-            if (categoria == null) return null;
+            if (categoria == null)
             return null;
 
             return new CategoriaDTO

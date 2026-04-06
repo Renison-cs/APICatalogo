@@ -132,7 +132,7 @@
   {
     "ContainingType": "APICatalogo.Controllers.CategoriasController",
     "Method": "GetCategoriasProdutos",
-    "RelativePath": "Categorias/produtos",
+    "RelativePath": "Categorias/Categorias",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -159,7 +159,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[APICatalogo.Models.Produto, APICatalogo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[APICatalogo.DTOs.ProdutoDTO, APICatalogo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -178,14 +178,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "produto",
-        "Type": "APICatalogo.Models.Produto",
+        "Name": "produtoDto",
+        "Type": "APICatalogo.DTOs.ProdutoDTO",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "APICatalogo.Models.Produto",
+        "Type": "APICatalogo.DTOs.ProdutoDTO",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -211,7 +211,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "APICatalogo.Models.Produto",
+        "Type": "APICatalogo.DTOs.ProdutoDTO",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -236,8 +236,8 @@
         "IsRequired": true
       },
       {
-        "Name": "produto",
-        "Type": "APICatalogo.Models.Produto",
+        "Name": "produtoDto",
+        "Type": "APICatalogo.DTOs.ProdutoDTO",
         "IsRequired": true
       }
     ],
@@ -259,7 +259,69 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "APICatalogo.Models.Produto",
+        "Type": "APICatalogo.DTOs.ProdutoDTO",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "APICatalogo.Controllers.ProdutosController",
+    "Method": "Patch",
+    "RelativePath": "Produtos/{id}/UpdatePartial",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "patchProdutoDTO",
+        "Type": "Microsoft.AspNetCore.JsonPatch.Operations.Operation[]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "APICatalogo.DTOs.ProdutoDTOUpdateResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "APICatalogo.Controllers.ProdutosController",
+    "Method": "Get",
+    "RelativePath": "Produtos/pagination",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "PageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[APICatalogo.DTOs.ProdutoDTO, APICatalogo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -285,7 +347,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[APICatalogo.Models.Produto, APICatalogo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[APICatalogo.DTOs.ProdutoDTO, APICatalogo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",

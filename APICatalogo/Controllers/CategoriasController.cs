@@ -5,6 +5,8 @@ using APICatalogo.Repositories;
 using APICatalogo.DTOs;
 using APICatalogo.Mappings;
 using APICatalogo.Filters;
+using APICatalogo.Pagination;
+using Newtonsoft.Json;
 
 namespace APICatalogo.Controllers
 {
@@ -21,7 +23,7 @@ namespace APICatalogo.Controllers
             _logger = logger;
         }
 
-        [HttpGet("produtos")]
+        [HttpGet]
         public ActionResult<IEnumerable<Categoria>> GetCategoriasProdutos()
         {
             _logger.LogInformation("Obtendo categorias com seus produtos relacionados");
@@ -29,13 +31,23 @@ namespace APICatalogo.Controllers
             return Ok(categorias);
         }
 
-        [HttpGet]
-        [ServiceFilter(typeof(ApiLoggingFilter))]
-        public ActionResult<IEnumerable<CategoriaDTO>> Get()
+        [HttpGet("pagination")]
+        
+        public ActionResult<IEnumerable<CategoriaDTO>> Get([FromQuery]
+                                        CategoriasParameters categoriasParameters)
         {
-           var categorias = _uof.CategoriaRepository.GetAll();
-            if(categorias is null)
-                return NotFound("Categorias não encontradas");
+           var categorias = _uof.CategoriaRepository.GetCategorias(categoriasParameters);
+           var metadata = new
+           {
+               categorias.TotalCount,
+               categorias.PageSize,
+               categorias.CurrentPage,
+               categorias.TotalPages,
+               categorias.HasNext,
+               categorias.HasPrevious
+           };
+
+            Response.Headers.Append("x-pagination", JsonConvert.SerializeObject(metadata));
 
             var categoriasDto = categorias.ToCategoriaDTOList();
             return Ok(categoriasDto);
