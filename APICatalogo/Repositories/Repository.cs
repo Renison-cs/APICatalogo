@@ -3,6 +3,7 @@ using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 
 
+
 namespace APICatalogo.Repositories
 {
     public class Repository<T> : IRepository<T> where T : class
@@ -14,15 +15,25 @@ namespace APICatalogo.Repositories
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
+
         public IEnumerable<T> GetAll()
         {
-            return _context.Set<T>().AsNoTracking().ToList();
+            return  _context.Set<T>().AsNoTracking();
         }
 
-        public T? Get(Expression<Func<T, bool>> predicate)
+        //public async Task<IQueryable<T>> GetAll()
+        //{
+        //    return _context.Set<T>().AsNoTracking();
+        //}
+
+        public async Task<T?> GetAsync(Expression<Func<T, bool>> predicate)
         {
-            return _context.Set<T>().FirstOrDefault(predicate);
+            return await _context.Set<T>().AsNoTracking().FirstOrDefaultAsync(predicate);
         }
+        //public T? Get(Expression<Func<T, bool>> predicate)
+        //{
+        //    return _context.Set<T>().FirstOrDefault(predicate);
+        //}
 
         public T Create(T entity)
         {
@@ -43,5 +54,6 @@ namespace APICatalogo.Repositories
            // _context.SaveChanges();
             return entity;
         }
+       
     }
 }

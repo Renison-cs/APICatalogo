@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "DE36SqxpA/I=",
+  "dgSpecHash": "IlXwCIKUiO8=",
   "success": true,
   "projectFilePath": "C:\\Macoratti\\APICatalogo\\APICatalogo\\APICatalogo.csproj",
   "expectedPackageFiles": [
@@ -57,7 +57,9 @@
     "C:\\Users\\miste\\.nuget\\packages\\system.text.encoding.codepages\\6.0.0\\system.text.encoding.codepages.6.0.0.nupkg.sha512",
     "C:\\Users\\miste\\.nuget\\packages\\system.text.encodings.web\\8.0.0\\system.text.encodings.web.8.0.0.nupkg.sha512",
     "C:\\Users\\miste\\.nuget\\packages\\system.text.json\\8.0.0\\system.text.json.8.0.0.nupkg.sha512",
-    "C:\\Users\\miste\\.nuget\\packages\\system.threading.channels\\6.0.0\\system.threading.channels.6.0.0.nupkg.sha512"
+    "C:\\Users\\miste\\.nuget\\packages\\system.threading.channels\\6.0.0\\system.threading.channels.6.0.0.nupkg.sha512",
+    "C:\\Users\\miste\\.nuget\\packages\\x.pagedlist\\10.5.9\\x.pagedlist.10.5.9.nupkg.sha512",
+    "C:\\Users\\miste\\.nuget\\packages\\x.pagedlist.mvc.core\\10.5.9\\x.pagedlist.mvc.core.10.5.9.nupkg.sha512"
   ],
   "logs": [
     {

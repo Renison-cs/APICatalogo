@@ -5,44 +5,6 @@
     "version": "1.0"
   },
   "paths": {
-    "/Categorias/Categorias": {
-      "get": {
-        "tags": [
-          "Categorias"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Categoria"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Categoria"
-                  }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Categoria"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/Categorias": {
       "get": {
         "tags": [
@@ -56,7 +18,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/CategoriaDTO"
+                    "$ref": "#/components/schemas/Categoria"
                   }
                 }
               },
@@ -64,7 +26,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/CategoriaDTO"
+                    "$ref": "#/components/schemas/Categoria"
                   }
                 }
               },
@@ -72,7 +34,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/CategoriaDTO"
+                    "$ref": "#/components/schemas/Categoria"
                   }
                 }
               }
@@ -125,6 +87,125 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/CategoriaDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Categorias/pagination": {
+      "get": {
+        "tags": [
+          "Categorias"
+        ],
+        "parameters": [
+          {
+            "name": "PageNumber",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CategoriaDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CategoriaDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CategoriaDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Categorias/Filter/nome/pagination": {
+      "get": {
+        "tags": [
+          "Categorias"
+        ],
+        "parameters": [
+          {
+            "name": "Nome",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "PageNumber",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CategoriaDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CategoriaDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CategoriaDTO"
+                  }
                 }
               }
             }
@@ -273,7 +354,7 @@
         }
       }
     },
-    "/Produtos/produtos/{id}": {
+    "/produtosPorCategoria{id}": {
       "get": {
         "tags": [
           "Produtos"

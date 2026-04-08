@@ -89,6 +89,10 @@
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[8.0.0, )"
+            },
+            "X.PagedList.Mvc.Core": {
+              "target": "Package",
+              "version": "[10.5.9, )"
             }
           },
           "imports": [
