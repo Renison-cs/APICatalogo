@@ -112,4 +112,12 @@ C:\Macoratti\APICatalogo\apicatalogo\obj\Debug\net8.0\refint\APICatalogo.dll
 C:\Macoratti\APICatalogo\apicatalogo\obj\Debug\net8.0\APICatalogo.pdb
 C:\Macoratti\APICatalogo\apicatalogo\obj\Debug\net8.0\APICatalogo.genruntimeconfig.cache
 C:\Macoratti\APICatalogo\apicatalogo\obj\Debug\net8.0\ref\APICatalogo.dll
-C:\Macoratti\APICatalogo\APICatalogo\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+C:\Macoratti\APICatalogo\APICatalogo\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Macoratti\APICatalogo\APICatalogo\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Macoratti\APICatalogo\APICatalogo\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Macoratti\APICatalogo\APICatalogo\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+C:\Macoratti\APICatalogo\APICatalogo\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+C:\Macoratti\APICatalogo\APICatalogo\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Macoratti\APICatalogo\APICatalogo\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+C:\Macoratti\APICatalogo\APICatalogo\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Macoratti\APICatalogo\APICatalogo\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
